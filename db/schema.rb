@@ -16,7 +16,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_08_025807) do
 
   create_table "forecasts", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.datetime "forecast_date"
+    t.date "forecast_date"
     t.float "humidity"
     t.bigint "location_id", null: false
     t.float "temp_max"
