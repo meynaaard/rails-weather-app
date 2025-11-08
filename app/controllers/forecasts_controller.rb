@@ -1,7 +1,7 @@
 class ForecastsController < ApplicationController
   def search
-    location = params[:location]
-    weather_data = WeatherService.get_forecast(location)
+    query = params[:location]
+    weather_data = WeatherService.get_forecast(query)
 
     if weather_data.nil?
       render json: { error: "Location not found" }, status: :not_found
