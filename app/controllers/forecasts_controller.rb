@@ -14,15 +14,15 @@ class ForecastsController < ApplicationController
       loc.longitude = weather_data[:location][:longitude]
     end
 
-    daily = weather_data[:daily]
-    daily["time"].each_with_index do |date, i|
-      Forecast.create!(
-        location: location,
-        forecast_date: date,
-        weather_code: daily["weather_code"][i],
-        temp_min: daily["temperature_2m_min"][i],
-        temp_max: daily["temperature_2m_max"][i]
-      )
-    end
+    current = weather_data[:current]
+    Forecast.create!(
+      location: location,
+      forecast_date: current["time"],
+      weather_code: current["weather_code"],
+      temperature: current["temperature_2m"],
+      humidity: current["relative_humidity_2m"],
+      wind_speed: current["wind_speed_10m"],
+      is_day: current["is_day"]
+    )
   end
 end
