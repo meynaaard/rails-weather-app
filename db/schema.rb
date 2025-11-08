@@ -16,11 +16,11 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_08_025807) do
 
   create_table "forecasts", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.date "forecast_date"
+    t.datetime "forecast_date"
     t.float "humidity"
+    t.integer "is_day"
     t.bigint "location_id", null: false
-    t.float "temp_max"
-    t.float "temp_min"
+    t.float "temperature"
     t.datetime "updated_at", null: false
     t.integer "weather_code"
     t.float "wind_speed"
