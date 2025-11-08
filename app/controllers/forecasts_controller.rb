@@ -6,7 +6,7 @@ class ForecastsController < ApplicationController
       return
     end
 
-    data = WeatherService.get_coordinates(location)
+    data = WeatherService.get_forecast(location)
     if data.nil?
       render json: { error: "Location not found" }, status: :not_found
     else
