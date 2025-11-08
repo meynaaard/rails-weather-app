@@ -4,9 +4,9 @@ class ForecastsController < ApplicationController
     weather_data = WeatherService.get_forecast(query)
 
     if weather_data.nil?
-      render json: { error: "Location not found" }, status: :not_found
-    else
-      render json: weather_data
+      flash[:alert] = "Location not found"
+      redirect_to root_path
+      return
     end
 
     location = Location.find_or_create_by(name: weather_data[:location][:name]) do |loc|
@@ -24,5 +24,7 @@ class ForecastsController < ApplicationController
       wind_speed: current["wind_speed_10m"],
       is_day: current["is_day"]
     )
+
+    redirect_to root_path
   end
 end
