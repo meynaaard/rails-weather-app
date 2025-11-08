@@ -45,6 +45,9 @@ gem "image_processing", "~> 1.2"
 # Bootstrap for CSS styling
 gem 'bootstrap', '~> 5.3.5'
 
+# HTTP Client Library
+gem 'faraday'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
