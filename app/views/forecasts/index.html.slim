@@ -1,9 +1,115 @@
 .container.mt-5
-  h1.text-center Weather Forecast
+  .display-1.text-center.text-white-50 Weather App
 
-  = form_with url: search_forecasts_path, method: :get, local: true, class: "d-flex justify-content-center mb-4" do |f|
-    = f.text_field :location, placeholder: "Enter a city...", class: "form-control me-2 w-50"
-    = f.submit "Search", class: "btn btn-success"
+  .row.d-flex.justify-content-center.py-5
+    .col-md-8.col-lg-6.col-xl-5
+      .card.text-body.rounded-5
+        .card-body.p-4
+          = form_with url: search_forecasts_path, method: :get, local: true, class: "d-flex mt-3 mb-4" do |f|
+            = f.text_field :location, placeholder: "Search...", class: "form-control me-2"
+            = button_tag type: "submit", class: "btn btn-success" do
+              i.bi.bi-search.me-1
 
-  - if flash[:alert]
-    .alert.alert-danger.text-center= flash[:alert]
+
+          - if flash[:alert]
+            .alert.alert-danger.text-center= flash[:alert]
+
+          .d-flex.text-center
+            .display-6.flex-grow-1 Manila
+
+          .d-flex.justify-content-around.mt-2.mb-4
+            .d-flex.flex-column.text-center
+              img src="https://arsentech.github.io/source-codes/weather-assets/slight-rain.svg" alt="wind-speed" width="150" height="150"
+              h6.display-4.mb-0.font-weight-bold 42.0°C
+              span.lead Clear
+
+            .d-flex.align-items-center
+              .flex-grow-1 style="font-size: 1rem;"
+                div
+                  img src="https://arsentech.github.io/source-codes/weather-assets/humidity.svg" alt="humidity" width="64" height="64"
+                  span.ms-1 80 %
+                div
+                  img src="https://arsentech.github.io/source-codes/weather-assets/wind.svg" alt="wind-speed" width="64" height="64"
+                  span.ms-1 40 km/h
+
+          .d-flex.text-center
+            .display-6.flex-grow-1 Daily Forecast
+
+          .container.overflow-auto.py-4
+            .d-flex.justify-content-start.flex-row.flex-nowrap.gap-3 style="height: 200px"
+              .card.card-body.flex-shrink-0.h-100.rounded-4.d-flex.flex-column.justify-content-between.align-items-center style="width: 150px"
+                img src="https://arsentech.github.io/source-codes/weather-assets/thunderstorm.svg" alt="wind-speed" width="100" height="100"
+                .d-flex.justify-content-between.gap-3
+                  span
+                    | 28.5
+                    strong °C
+                  span
+                    | 27.5
+                    strong °C
+                span 2025-11-09
+
+              .card.card-body.flex-shrink-0.h-100.rounded-4.d-flex.flex-column.justify-content-between.align-items-center style="width: 150px"
+                img src="https://arsentech.github.io/source-codes/weather-assets/hail.svg" alt="wind-speed" width="100" height="100"
+                .d-flex.justify-content-between.gap-3
+                  span
+                    | 28.5
+                    strong °C
+                  span
+                    | 27.5
+                    strong °C
+                span 2025-11-10
+
+              .card.card-body.flex-shrink-0.h-100.rounded-4.d-flex.flex-column.justify-content-between.align-items-center style="width: 150px"
+                img src="https://arsentech.github.io/source-codes/weather-assets/slight-rain-showers.svg" alt="wind-speed" width="100" height="100"
+                .d-flex.justify-content-between.gap-3
+                  span
+                    | 28.5
+                    strong °C
+                  span
+                    | 27.5
+                    strong °C
+                span 2025-11-11
+
+              .card.card-body.flex-shrink-0.h-100.rounded-4.d-flex.flex-column.justify-content-between.align-items-center style="width: 150px"
+                img src="https://arsentech.github.io/source-codes/weather-assets/partly-cloudy.svg" alt="wind-speed" width="100" height="100"
+                .d-flex.justify-content-between.gap-3
+                  span
+                    | 28.5
+                    strong °C
+                  span
+                    | 27.5
+                    strong °C
+                span 2025-11-12
+
+              .card.card-body.flex-shrink-0.h-100.rounded-4.d-flex.flex-column.justify-content-between.align-items-center style="width: 150px"
+                img src="https://arsentech.github.io/source-codes/weather-assets/slight-rain-showers.svg" alt="wind-speed" width="100" height="100"
+                .d-flex.justify-content-between.gap-3
+                  span
+                    | 28.5
+                    strong °C
+                  span
+                    | 27.5
+                    strong °C
+                span 2025-11-13
+
+              .card.card-body.flex-shrink-0.h-100.rounded-4.d-flex.flex-column.justify-content-between.align-items-center style="width: 150px"
+                img src="https://arsentech.github.io/source-codes/weather-assets/thunderstorm.svg" alt="wind-speed" width="100" height="100"
+                .d-flex.justify-content-between.gap-3
+                  span
+                    | 28.5
+                    strong °C
+                  span
+                    | 27.5
+                    strong °C
+                span 2025-11-14
+
+              .card.card-body.flex-shrink-0.h-100.rounded-4.d-flex.flex-column.justify-content-between.align-items-center style="width: 150px"
+                img src="https://arsentech.github.io/source-codes/weather-assets/hail.svg" alt="wind-speed" width="100" height="100"
+                .d-flex.justify-content-between.gap-3
+                  span
+                    | 28.5
+                    strong °C
+                  span
+                    | 27.5
+                    strong °C
+                span 2025-11-15
