@@ -1,21 +1,28 @@
 class ForecastsController < ApplicationController
   def search
-    query = params[:location]
-    weather_data = WeatherService.get_forecast(query)
+    @forecast = WeatherService.get_forecast(params[:location])
 
-    if weather_data.nil?
-      flash[:alert] = "Location not found"
-      redirect_to root_path
+    if @forecast.nil?
+      flash.now[:alert] = "Location not found"
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            "forecast",
+            partial: "forecasts/alert",
+            locals: { message: flash.now[:alert] }
+          )
+        end
+      end
       return
     end
 
-    location = Location.find_or_create_by(name: weather_data[:location][:name]) do |loc|
-      loc.latitude = weather_data[:location][:latitude]
-      loc.longitude = weather_data[:location][:longitude]
+    location = Location.find_or_create_by(name: @forecast[:location][:name]) do |loc|
+      loc.latitude = @forecast[:location][:latitude]
+      loc.longitude = @forecast[:location][:longitude]
     end
 
-    current = weather_data[:current]
-    Forecast.create!(
+    current = @forecast[:current]
+    forecast = Forecast.create!(
       location: location,
       forecast_date: current["time"],
       weather_code: current["weather_code"],
@@ -25,6 +32,15 @@ class ForecastsController < ApplicationController
       is_day: current["is_day"]
     )
 
-    redirect_to root_path
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "forecast",
+          partial: "forecasts/current_forecast",
+          locals: { forecast: @forecast }
+        )
+      end
+    end
+    return
   end
 end
