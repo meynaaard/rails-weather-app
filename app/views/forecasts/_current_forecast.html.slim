@@ -2,23 +2,33 @@
 - current = forecast[:current]
 - daily = forecast[:daily]
 
+- weather_code = current["weather_code"]
+- wind_speed = current["wind_speed_10m"]
+- is_day = current["is_day"]
+
+- weather_name = weather_name(weather_code)
+- weather_icon_path = weather_icon_path(weather_code, is_day)
+- wind_beaufort_scale = wind_beaufort_scale(wind_speed)
+
+- weather_assets = "https://arsentech.github.io/source-codes/weather-assets/"
+
 = turbo_frame_tag "forecast"
   .d-flex.text-center
     .display-6.flex-grow-1 = location[:name]
 
   .d-flex.justify-content-around.mt-2.mb-4
     .d-flex.flex-column.text-center
-      img src="https://arsentech.github.io/source-codes/weather-assets/slight-rain.svg" alt="wind-speed" width="150" height="150"
-      h6.display-4.mb-0.font-weight-bold= "#{current["temperature_2m"]}°C"
-      span.lead Clear
+      = image_tag "#{weather_assets}/#{weather_icon_path}", alt: "weather", width: "150", height: "150"
+      h6.display-4.mb-0.font-weight-bold = "#{current["temperature_2m"]}°C"
+      span.lead = weather_name
 
     .d-flex.align-items-center
       .flex-grow-1 style="font-size: 1rem;"
         div
-          img src="https://arsentech.github.io/source-codes/weather-assets/humidity.svg" alt="humidity" width="64" height="64"
+          = image_tag "humidity.svg", alt: "humidity", width: "64", height: "64"
           span.ms-1= "#{current["relative_humidity_2m"]} %"
         div
-          img src="https://arsentech.github.io/source-codes/weather-assets/wind.svg" alt="wind-speed" width="64" height="64"
+          = image_tag "#{wind_beaufort_scale}", alt: "wind-speed", width: "64", height: "64"
           span.ms-1= "#{current["wind_speed_10m"]} km/h"
 
   / = render "daily_forecast"

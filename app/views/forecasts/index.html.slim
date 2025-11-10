@@ -3,7 +3,7 @@
 
   .row.d-flex.justify-content-center.py-5
     .col-md-8.col-lg-6.col-xl-5
-      .card.text-body.rounded-5
+      .card.bg-light.text-body.rounded-5
         .card-body.p-4
           = form_with url: search_forecasts_path, method: :get, data: { turbo_stream: true }, class: "d-flex mt-3 mb-4" do |f|
             = f.search_field :location, placeholder: "Search...", class: "form-control me-2"
