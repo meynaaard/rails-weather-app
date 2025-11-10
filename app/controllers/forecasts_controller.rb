@@ -16,9 +16,10 @@ class ForecastsController < ApplicationController
       return
     end
 
-    location = Location.find_or_create_by(name: forecast[:location][:name]) do |loc|
-      loc.latitude = forecast[:location][:latitude]
-      loc.longitude = forecast[:location][:longitude]
+    location = Location.find_or_create_by(name: forecast[:location][:name]) do |l|
+      l.latitude = forecast[:location][:latitude]
+      l.longitude = forecast[:location][:longitude]
+      l.timezone = forecast[:location][:timezone]
     end
 
     current = forecast[:current]

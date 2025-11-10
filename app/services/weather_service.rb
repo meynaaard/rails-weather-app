@@ -42,7 +42,8 @@ class WeatherService
     {
       name: result["name"],
       latitude: result["latitude"],
-      longitude: result["longitude"]
+      longitude: result["longitude"],
+      timezone: result["timezone"]
     }
   end
 end
