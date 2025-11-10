@@ -1,0 +1,45 @@
+- weather_assets = "https://arsentech.github.io/source-codes/weather-assets/"
+- weather_icon_path = weather_icon_path(@current_forecast.weather_code, @current_forecast.is_day)
+- weather_name = weather_name(@current_forecast.weather_code)
+- wind_beaufort_scale = wind_beaufort_scale(@current_forecast.wind_speed)
+
+= turbo_frame_tag "forecast"
+  .d-flex.text-center
+    .display-6.flex-grow-1 = @current_forecast.location.name
+
+  .d-flex.justify-content-around.mt-2.mb-4
+    .d-flex.flex-column.text-center
+      = image_tag "#{weather_assets}/#{weather_icon_path}", alt: "weather", width: "150", height: "150"
+      h6.display-4.mb-0.font-weight-bold = "#{@current_forecast.temperature}°C"
+      span.lead = weather_name
+
+    .d-flex.align-items-center
+      .flex-grow-1 style="font-size: 1rem;"
+        div
+          = image_tag "humidity.svg", alt: "humidity", width: "64", height: "64"
+          span.ms-1 = "#{@current_forecast.humidity} %"
+        div
+          = image_tag "#{wind_beaufort_scale}", alt: "wind-speed", width: "64", height: "64"
+          span.ms-1 = "#{@current_forecast.wind_speed} km/h"
+
+  hr
+  .d-flex.text-center
+    .display-6.flex-grow-1 Daily Forecast
+
+  .container.overflow-auto.py-4
+    .d-flex.justify-content-start.flex-row.flex-nowrap.gap-3 style="height: 230px"
+      - @daily_forecast.each do |day|
+        - weather_icon_path = weather_icon_path(day[:weather_code], 1)
+
+        .card.flex-shrink-0.h-100.p-3.rounded-4.d-flex.flex-column.justify-content-around.align-items-center.text-center style="width: 150px"
+          strong #{day[:day]}
+          = image_tag "#{weather_assets}/#{weather_icon_path}", alt: "weather", width: "100", height: "100"
+          span
+            | #{weather_name(day[:weather_code])}
+          .d-flex.justify-content-between.gap-3
+            span
+              | #{day[:temp_max]}
+              strong °C
+            span
+              | #{day[:temp_min]}
+              strong °C
