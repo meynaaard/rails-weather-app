@@ -1,12 +1,12 @@
-require 'faraday'
-require 'json'
+require "faraday"
+require "json"
 
 class WeatherService
   BASE_URL = "https://api.open-meteo.com/v1/forecast"
   GEO_URL = "https://geocoding-api.open-meteo.com/v1/search"
 
   def self.get_forecast(location_name)
-    location = get_coordinates(location_name)
+    location = get_coordinates(location_name.strip)
     return nil unless location
 
     response = Faraday.get(BASE_URL, {
@@ -31,8 +31,8 @@ class WeatherService
     response = Faraday.get(GEO_URL, {
       name: location_name,
       count: 1,
-      language: 'en',
-      format: 'json'
+      language: "en",
+      format: "json"
     })
 
     data = JSON.parse(response.body)

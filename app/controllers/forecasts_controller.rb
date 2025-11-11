@@ -1,6 +1,6 @@
 class ForecastsController < ApplicationController
   def search
-    forecast = WeatherService.get_forecast(params[:location].strip)
+    forecast = WeatherService.get_forecast(params[:location])
 
     if forecast.nil?
       flash.now[:alert] = "Location not found"
