@@ -25,6 +25,12 @@ class WeatherServiceTest < ActiveSupport::TestCase
     assert result[:current] || result[:daily]
   end
 
+  # made up location
+  test "get_forecast handles made up location" do
+    result = WeatherService.get_forecast("Gotham City")
+    assert_nil result
+  end
+
   # empty input
   test "get_forecast handles empty input safely" do
     result = WeatherService.get_forecast("")
