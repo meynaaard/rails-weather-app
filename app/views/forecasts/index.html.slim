@@ -9,10 +9,10 @@
             = f.search_field :location, placeholder: "Search...", class: "form-control me-2", list: "datalistOptions", autocomplete: "off"
             = button_tag type: "submit", class: "btn btn-success w-25" do
               i.bi.bi-search.me-1
-            datalist id="datalistOptions"
+            datalist#datalistOptions
               option value="New York"
               option value="Paris"
               option value="London"
 
-          = turbo_frame_tag "forecast"
+          .container#forecast
             p.text-center.text-muted Search for a city to view its weather information

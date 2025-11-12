@@ -3,7 +3,7 @@
 - weather_name = weather_name(@current_forecast.weather_code)
 - wind_beaufort_scale = wind_beaufort_scale(@current_forecast.wind_speed)
 
-= turbo_frame_tag "forecast"
+.container#forecast
   .d-flex.text-center
     .display-5.flex-grow-1 = @current_forecast.location.name
     .display-5.flex-grow-1 = @current_forecast.current_time_in_zone
